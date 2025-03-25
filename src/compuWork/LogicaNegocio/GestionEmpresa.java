@@ -157,16 +157,18 @@ public class GestionEmpresa {
     //*METODO ADICIONAL*
     
     public boolean asignarEmpleadoADepto(int idEmp, int idDepto) {
-        Empleado empleadito = buscarEmpleado(idEmp);
-        Departamento departamentito = buscarDepartamento(idDepto);
-       
-        if (empleadito != null && departamentito != null) {
-            return departamentito.asignarEmpleado(empleadito);
-        }
-        return false; 
-    
-    }
+        Empleado empleado = buscarEmpleado(idEmp);
+        Departamento departamento = buscarDepartamento(idDepto);
 
+        if (empleado == null) {
+            throw new IllegalArgumentException("El empleado con ID " + idEmp + " no existe.");
+        }
+        if (departamento == null) {
+            throw new IllegalArgumentException("El departamento con ID " + idDepto + " no existe.");
+        }
+
+        return departamento.asignarEmpleado(empleado);
+    }
 }
 
 

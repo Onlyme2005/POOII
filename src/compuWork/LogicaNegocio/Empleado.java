@@ -12,6 +12,7 @@ public class Empleado {
     private String puesto;
     private double salario;
     private String contrato;
+    
 
      private List<ReporteDesempeño> reportes;
 

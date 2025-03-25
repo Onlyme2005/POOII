@@ -64,10 +64,10 @@ public class Departamento {
         return empleado;
       
     }
-    //Aplicacion de Excepcion 
+   
     public boolean asignarEmpleado(Empleado empleadito) {
         if (empleadito == null) {
-            throw new IllegalArgumentException("No se puede asignar un empleado nulo.");
+            throw new IllegalArgumentException("Error, no puede ingresar un valor nulo.");
         }
         if (registroEmpleados.contains(empleadito)) {
             return false; 

@@ -58,28 +58,53 @@ public class ReporteDesempeño {
         this.empleadito = empleadito;
     }
     
-     public static void generarReporteIndividual( Empleado empleadito, double productividad, double puntualidad, double calidadTrabajo, LocalDate fechaEvaluacion ) {
-        System.out.println("~Reporte de Desempeño Individual~" +fechaEvaluacion);
-        System.out.println("Empleado: " + empleadito.getNombre());
-        System.out.println("Puesto: " + empleadito.getPuesto());
-        System.out.println("Productividad: " + productividad + "%");
-        System.out.println("Puntualidad: " + puntualidad+ "%");
-        System.out.println("Calidad del Trabajo: " + calidadTrabajo + "%");
-      }
-      
-    // Generar un reporte para un departamento
-    public static void generarReporteDepartamento(String departamentito, ArrayList<Empleado> empleados,String evaluacion) {
-        System.out.println("~Reporte de Desempeño del Departamento: " + departamentito + "~");
-        
-        double totalProductividad = 0;
-        double totalPuntualidad = 0;
-        double totalCalidad = 0;
-        
-        int cantidadEmpleados = empleados.size();
-        System.out.println("Número de empleados: " + cantidadEmpleados);
-        System.out.println("Promedio Productividad: " + (totalProductividad / cantidadEmpleados) + "%");
-        System.out.println("Promedio Puntualidad: " + (totalPuntualidad / cantidadEmpleados) + "%");
-        System.out.println("Promedio Calidad del Trabajo: " + (totalCalidad / cantidadEmpleados) + "%");
+    //GENERAR REPORTE A NIVEL EMPLEADO
+    public static void generarReporteIndividual(Empleado empleadito, double productividad, double puntualidad, double calidadTrabajo) {
+        try {
+            if (empleadito == null) {
+                throw new IllegalArgumentException("El empleado no puede ser nulo.");
+            }
+            if (productividad < 0 || puntualidad < 0 || calidadTrabajo < 0) {
+                throw new IllegalArgumentException("Los valores de productividad, puntualidad y calidad no pueden ser negativos.");
+            }
+            System.out.println("~Reporte de Desempeño Individual~" + LocalDate.now());
+            System.out.println("Empleado: " + empleadito.getNombre());
+            System.out.println("Puesto: " + empleadito.getPuesto());
+            System.out.println("Productividad: " + productividad + "%");
+            System.out.println("Puntualidad: " + puntualidad + "%");
+            System.out.println("Calidad del Trabajo: " + calidadTrabajo + "%");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al generar reporte individual: " + e.getMessage());
+        }
     }
     
+    // GENEREAR REPORTE DESEMPEÑO A NIVEL DEPARTAMENTAL
+    public static void generarReporteDepartamento(String departamentito, ArrayList<Empleado> empleados) {
+        try {
+            if (empleados == null || empleados.isEmpty()) {
+                throw new IllegalArgumentException("El departamento no tiene empleados para evaluar.");
+            }
+            System.out.println("~Reporte de Desempeño del Departamento: " + departamentito + "~");
+            
+            double totalProductividad = 0;
+            double totalPuntualidad = 0;
+            double totalCalidad = 0;
+            
+            int cantidadEmpleados = empleados.size();
+            for (Empleado e : empleados) {
+                for (ReporteDesempeño r : e.getReportes()) {
+                    totalProductividad += r.getProductividad();
+                    totalPuntualidad += r.getPuntualidad();
+                    totalCalidad += r.getCalidadTrabajo();
+                }
+            }
+            
+            System.out.println("Número de empleados: " + cantidadEmpleados);
+            System.out.println("Promedio Productividad: " + (totalProductividad / cantidadEmpleados) + "%");
+            System.out.println("Promedio Puntualidad: " + (totalPuntualidad / cantidadEmpleados) + "%");
+            System.out.println("Promedio Calidad del Trabajo: " + (totalCalidad / cantidadEmpleados) + "%");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al generar reporte del departamento: " + e.getMessage());
+        }
+    }
 }
