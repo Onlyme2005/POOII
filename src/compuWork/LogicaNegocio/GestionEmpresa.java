@@ -5,14 +5,41 @@ import java.util.ArrayList;
 
 
 public class GestionEmpresa {
-    
+    private String nombre;
+    private AdministradorCW admin;
     private final ArrayList<Empleado> registroEmpleados;
     private final ArrayList<Departamento> departamentos;
 
-    public GestionEmpresa(ArrayList<Empleado> registroEmpleados) {
+    public GestionEmpresa(String nombre) {
+        this.nombre = nombre;
         this.departamentos = new ArrayList<>();
-        this.registroEmpleados = new ArrayList<>(registroEmpleados); 
+        this.registroEmpleados = new ArrayList<>();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setAdmin(AdministradorCW admin) {
+        this.admin = admin;
+    }
+
+    public AdministradorCW getAdmin() {
+        return admin;
+    }
+
+    public ArrayList<Empleado> getRegistroEmpleados() {
+        return new ArrayList<>(registroEmpleados);
+    }
+    public ArrayList<Departamento> getDepartamentos() {
+        return departamentos;
+    }
+    
+    
     
     //Metodos CRUD
     
@@ -55,7 +82,7 @@ public class GestionEmpresa {
     
     public Empleado actualizarEmpleado(int idEmp, Empleado empleadito){
         int index = buscarIdEmpleado(idEmp);
-        if (index>0) {
+        if (index>=0) {
             return this.registroEmpleados.set(index,empleadito);
         }else{
             return null;
@@ -65,7 +92,7 @@ public class GestionEmpresa {
     //ELIMINAR EMPLEADO
     public Empleado eliminarEmpleado (int idEmp){
         int index =buscarIdEmpleado(idEmp);
-        if (index>0){
+        if (index>=0){
             return this.registroEmpleados.remove(index); 
         }
         return null;
@@ -80,7 +107,10 @@ public class GestionEmpresa {
         }
     return empleado;
     }
-
+    
+        public ArrayList<Empleado> obtenerEmpleado(){
+        return this.getRegistroEmpleados();
+        }
     
 //*METOODS CRUD DEPARTAMENTO*: 
     
@@ -125,7 +155,7 @@ public class GestionEmpresa {
 //ACTUALIZAR DEPARTAMENTOS   
     public Departamento actualizarDepartamento(int idDepto,Departamento departamentito){
         int index=this.buscarIndiceDepto(idDepto);
-        if(index>0){
+        if(index>=0){
             return this.departamentos.set(index, departamentito);
         }else{
             return null;
@@ -135,12 +165,17 @@ public class GestionEmpresa {
 //ELIMINAR DEPARTAMENTO
     public Departamento eliminarDepartamento(int idDepto){
         int index= this.buscarIndiceDepto(idDepto);
-        if (index>0){
+        if (index>=0){
             return this.departamentos.remove(index);   
         }else{
             
     }return null;
     
+    }
+       
+    public ArrayList<Departamento> obtenerDepartamento(){
+        return this.getDepartamentos();
+        
 }
     
  // MOSTRAR DEPARTAMENTOS
@@ -169,8 +204,12 @@ public class GestionEmpresa {
 
         return departamento.asignarEmpleado(empleado);
     }
+     //*Iniciar Sesion
+    
+        public boolean iniciarSesion(String user, String pass) {
+        return user.equals(this.admin.getUserName())&& pass.equals(this.admin.getPassword());
+
+    }
 }
-
-
         
 

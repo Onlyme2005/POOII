@@ -4,17 +4,26 @@
  */
 package compuworkiipoo;
 
+import compuWork.CapaPresentacion.IniciarSesion;
+import compuWork.CapaPresentacion.Modelo;
+import compuWork.LogicaNegocio.AdministradorCW;
+import compuWork.LogicaNegocio.GestionEmpresa;
+
 /**
  *
  * @author Brislleily S.Carmona
  */
 public class CompuWorKIIPOO {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+      public static void main(String[] args) {
+        GestionEmpresa gestion=new GestionEmpresa("COMPUWORK");
+        
+        AdministradorCW admin = new AdministradorCW ("Star","Bris05", "2005") {};
+        gestion.setAdmin(admin);
+        
+        Modelo ventana= new Modelo(gestion);
+        //ventana.setVisible(true);
+        IniciarSesion sesion = new IniciarSesion(ventana,true,gestion,ventana);
+        sesion.setVisible(true);
+      }
 }

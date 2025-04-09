@@ -2,22 +2,22 @@
 package compuWork.LogicaNegocio;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class Departamento {
     private String nombreDepto;
     private int idDepto;
     private String descripcion;
-    private List<ReporteDesempeño> reportes; 
+     
 
     private final  ArrayList<Empleado> registroEmpleados = new ArrayList<>();
 
-    public Departamento(String nombreDepto, int idDepto, String descripcion, List<ReporteDesempeño> reportes) {
+    public Departamento(String nombreDepto, int idDepto, String descripcion) {
         this.nombreDepto = nombreDepto;
         this.idDepto = idDepto;
         this.descripcion = descripcion;
-        this.reportes = reportes;
+        
     }
 
     public String getNombreDepto() {
@@ -46,10 +46,6 @@ public class Departamento {
 
     public ArrayList<Empleado> getRegistroEmpleados() {
         return registroEmpleados;
-    }
-
-    public List<ReporteDesempeño> getReportes() {
-        return reportes;
     }
     
 
@@ -83,5 +79,9 @@ public class Departamento {
                 "Descripcion: " +descripcion+ "\n";
                 
  
+    }
+
+    public void setIdDepto(String idDepto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

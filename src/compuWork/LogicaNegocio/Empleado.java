@@ -14,7 +14,7 @@ public class Empleado {
     private String contrato;
     
 
-     private List<ReporteDesempeño> reportes;
+     List<ReporteDesempeño> reportes;
 
     public Empleado(String nombre, int idEmp, String correo, int telefono, String puesto, double salario, String contrato, List<ReporteDesempeño> reportes) {
         this.nombre = nombre;
